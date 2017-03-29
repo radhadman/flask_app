@@ -49,9 +49,16 @@ def logout():
     return redirect(url_for('out'))
 	
 	
-@app.route('/posts')
-def blog():
-	return render_template('posts.html')
+@app.route('/posts', methods=['POST', 'GET'])
+def home():
+    if request.method == 'POST':
+        name = request.form['name']
+        comment = request.form['comment']
+        models.insertPost(name, comment)
+        return render_template('posts.html')
+    else:
+        p = models.retrievePosts()
+        return render_template('posts.html', p=p)
 	
 
 # start the server with the 'run()' method
