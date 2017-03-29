@@ -1,3 +1,4 @@
+import models
 from flask import Flask, Response, render_template, redirect, url_for, request, session, flash, g
 from functools import wraps
 import sqlite3
@@ -6,7 +7,6 @@ app = Flask(__name__)
 
 # config
 app.secret_key = 'assign2key'
-app.database = 'database.db'
 
 # login decorator
 def login_required(f):
@@ -18,15 +18,6 @@ def login_required(f):
             flash('Please login.')
             return redirect(url_for('login'))
     return wrap
-	
-@app.route('/posts')
-@login_required
-def blog():
-    g.db = connect_db()
-    cur = g.db.execute('select * from posts')
-    posts = [dict(title=row[0], description=row[1]) for row in cur.fetchall()]
-    g.db.close()
-    return render_template('posts.html', posts=posts)  # render a template
 	
 	
 @app.route('/')
@@ -62,7 +53,14 @@ def logout():
 	
 @app.route('/posts', methods=['POST', 'GET'])
 def posts():
-	return render_template('posts.html')
+    if request.method == 'POST':
+        name = request.form['name']
+        comment = request.form['comment']
+        models.insertPost(name, comment)
+        return render_template('posts.html')
+    else:
+        posts = models.retrievePosts()
+        return render_template('posts.html', posts=posts)
 	
 
 # start the server with the 'run()' method
