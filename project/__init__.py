@@ -19,6 +19,7 @@ def login_required(f):
             return redirect(url_for('login'))
     return wrap
 	
+	
 @app.route('/')
 @login_required
 def home():
@@ -65,7 +66,7 @@ def posts():
 # start the server with the 'run()' method
 if __name__ == '__main__':
     app.run(debug=True)
-	app.run()
+	
 	
 
         
