@@ -57,8 +57,8 @@ def posts():
         models.insertPost(name, comment)
         return render_template('posts.html')
     else:
-        p = models.retrievePosts()
-        return render_template('posts.html', p=p)
+        posts = models.retrievePosts()
+        return render_template('posts.html', posts=posts)
 	
 
 # start the server with the 'run()' method
