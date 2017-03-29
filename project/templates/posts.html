@@ -7,7 +7,7 @@
   </head>
   <body>
   <div class="container">
-  {%if posts%}
+  
       <h1>Posts</h1>
       <br>
 	   <form action="/posts" method="post">Use the box below to submit a post:
@@ -19,6 +19,7 @@
       </form>
       <br>
 	  <br>
+	  {%if posts%}
 	  <ol>
 		{%for post in posts%}
 		<li>{{post[0]}}</li>
