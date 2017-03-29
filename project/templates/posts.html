@@ -1,15 +1,24 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Lab2</title>
+    <title>Assignment 2</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="static/main.css" rel="stylesheet" media="screen">
   </head>
   <body>
   <div class="container">
   {%if posts%}
-      <h1>Posts:</h1>
+      <h1>Posts</h1>
       <br>
+	   <form action="/posts" method="post">Use the box below to submit a post:
+	  <br>
+        <textarea name= "newpost" style = "resize: none" rows="5" cols="50" type="text" 
+		placeholder="Write here..."> </textarea>
+		<br>
+         <input class="btn btn-default" type="submit" value="Submit">
+      </form>
+      <br>
+	  <br>
 	  <ol>
 		{%for post in posts%}
 		<li>{{post[0]}}</li>
