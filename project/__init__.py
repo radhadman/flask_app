@@ -1,7 +1,6 @@
 import models
 from flask import Flask, Response, render_template, redirect, url_for, request, session, flash, g
 from functools import wraps
-import sqlite3
 
 app = Flask(__name__)
 
