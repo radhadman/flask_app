@@ -51,7 +51,7 @@ def logout():
 	
 	
 @app.route('/posts')
-def blog()
+def blog():
 	return render_template('posts.html')
 	
 
