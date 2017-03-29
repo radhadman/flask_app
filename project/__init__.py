@@ -1,7 +1,7 @@
 import models
-from flask import Flask, Response, render_template, redirect, url_for, request, session, flash
+from flask import Flask, Response, render_template, redirect, url_for, request, session, flash, g
 from functools import wraps
-
+import sqlite3
 
 app = Flask(__name__)
 
@@ -53,14 +53,7 @@ def logout():
 	
 @app.route('/posts', methods=['POST', 'GET'])
 def posts():
-    if request.method == 'POST':
-        name = request.form['name']
-        comment = request.form['comment']
-        models.insertPost(name, comment)
-        return render_template('posts.html')
-    else:
-        posts = models.retrievePosts()
-        return render_template('posts.html', posts=posts)
+	return render_template('posts.html')
 	
 
 # start the server with the 'run()' method
