@@ -50,7 +50,7 @@ def logout():
 	
 	
 @app.route('/posts', methods=['POST', 'GET'])
-def home():
+def posts():
     if request.method == 'POST':
         name = request.form['name']
         comment = request.form['comment']
