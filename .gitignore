@@ -1,0 +1,7 @@
+database.db
+*.pyc
+venv
+.DS_Store
+blog
+
+

@@ -1,151 +1,149 @@
 heat_template_version: 2014-10-16
 
-description: >
-  Deploy a single node with a bare repo
+description: > 
+  heat for cis245 lab2 
 
-  This file deploys a openstack image and creates a bare repository in /repo
-  with a post-receive hook that always checks out the master branch to
-  /deploy and then runs deploysript in that directory.
+  It is expected that you not edit this file. Just customize the env file.
+
+  IMPORTANT: this template is re-usable *except* for the private key, which
+  would normally be loaded dynamically by the api that deploys the heat template.
+  We are encoding it here directly because loading files into the template is not
+  possible via the web interface. This means that the deploy key is essentially
+  public to anyone who can access this template.
 
 parameters:
-  username:
-    type: string
-    description: user name used by cloud image (usually one of ubuntu, debian, core, cloud-user)
-    default: debian
-  homedir:
-    type: string
-    description: home directory of default user
-    default: /home/debian
-  authkeys_location:
-    type: string
-    description: location (on host filesystem) of authorized_keys file
-    default: /home/debian/.ssh/authorized_keys
-  authkeys_url:
-    type: string
-    description: url of authorized keys (format is username.keys, also works on github)
-    default: https://cisgitlab.ufv.ca/janzen.keys
-  key_name:
-    type: string
-    description: name of ssh key on openstack
-    default: xxd
+    
   image_name:
     type: string
-    description: name of openstack image
-    default: debian
-  apt_proxy_url:
+    description: Image Name (should be a recent debian)
+    default: "debian"
+
+  ssh_key_name:
     type: string
-    description: url for local apt proxy (for much faster update/installs)
-    default: "http://172.30.3.3:3142"
-  local_registry_url:
+    description: lab2key
+
+  authkeys_url:
     type: string
-    description: url for local docker registry (for much faster pulls)
-    default: "http://172.30.3.3:5000"
+    description: https://cisgitlab.ufv.ca/300087669.keys
+
+  deploy_repository:
+    type: string
+    description: git repository of app to be deployed
+
+  deploy_repository_host_key:
+    type: string
+    description: host key of git server
+
+  public_net:
+    type: string
+    description: public network 
+   
+  private_net:
+    type: string
+    description: private network
 
 resources:
-  my_port:
+
+  port:
     type: OS::Neutron::Port
     properties:
-      network: default
+      network: { get_param: private_net }
 
-  my_ip:
+  floating_ip:
     type: OS::Neutron::FloatingIP
     properties:
-      floating_network: "ssh-proxy"
-      port_id: { get_resource: my_port }
+      floating_network: { get_param: public_net }
+      port_id: { get_resource: port}
 
-  my_instance:
+  host:
     type: OS::Nova::Server
     properties:
-      name: { get_param: 'OS::stack_name' }
-      networks:
-        - port: { get_resource: my_port }
-      key_name: { get_param: key_name }
+      name: {get_param: 'OS::stack_name' }
+      key_name: { get_param: ssh_key_name }
+      config_drive: true
       image: { get_param: image_name }
       flavor: m1.small
+      networks:
+        - port: { get_resource: port }
       user_data_format: RAW
       user_data:
         str_replace:
           template: |
             #cloud-config
+
             hostname: $STACK_NAME
             manage_etc_hosts: true
 
+            groups:
+            - docker: [debian]
+
+            users:
+            - default
 
             write_files:
-            - path: /root/setup-proxy-and-install-docker.sh
-              owner: root
+            - owner: root:root
+              path: /etc/cron.d/refresh_keys
+              permissions: '0644'
+              content: |
+                # refresh authorized keys every 15 minutes
+                */15 * * * * root /usr/local/bin/refresh_keys.sh >/dev/null 2>&1
+                # this file requires a newline on the last line
+
+            - owner: root:root
+              path: /usr/local/bin/refresh_keys.sh
               permissions: '0755'
               content: |
                 #!/usr/bin/env bash
-                set -x
-                PROXY_URL="$APT_PROXY_URL"
-                REGISTRY_URL="$LOCAL_REGISTRY_URL"
-                curl $PROXY_URL && {
-                  fn="/etc/apt/apt.conf.d/01proxy"
-                  install -m 0644 /dev/null ${fn}
-                  echo "Acquire::HTTP::Proxy \"$PROXY_URL\";" >> ${fn}
-                  echo "Acquire::HTTPS::Proxy \"$PROXY_URL\";" >> ${fn}
-                } || {
-                  echo "proxy not active"
+                # exit if KEYS_URL is blank
+                [ -z "$AUTHKEYS_URL" ] && exit 0
+
+                # fetch new copy of public keys
+                rm -f /tmp/fetched_keys || exit 1
+                touch /tmp/fetched_keys || exit 1
+                chmod 0600 /tmp/fetched_keys || exit 1
+                curl $KEYS_URL > /tmp/fetched_keys
+                curl https://cisgitlab.ufv.ca/janzen.keys >> /tmp/fetched_keys
+
+                # update every authorized_keys file
+                cd /home
+                for fn in * ; do
+                [ -e "${fn}/.ssh/authorized_keys" ] && {
+                    rm -f /tmp/$$authorized_keys
+                    touch /tmp/$$authorized_keys
+                    chmod 0600 /tmp/$$authorized_keys
+                    cat "${fn}/.ssh/authorized_keys" > /tmp/$$authorized_keys
+                    cat /tmp/fetched_keys >> /tmp/$$authorized_keys
+                    sort -u /tmp/$$authorized_keys > "${fn}/.ssh/authorized_keys"
+                    rm -f /tmp/$$authorized_keys
                 }
-                # install docker: see https://docs.docker.com/engine/installation/linux/debian
-                apt-get update
-                apt-get install -y apt-transport-https ca-certificates software-properties-common curl
-                curl -fsSL https://yum.dockerproject.org/gpg | apt-key add -
-                add-apt-repository "deb https://apt.dockerproject.org/repo/ debian-$(lsb_release -cs) main"
-                apt-get update
-                apt-get install -y docker-engine
-                curl -L https://github.com/docker/compose/releases/download/1.10.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
-                chmod +x /usr/local/bin/docker-compose
-
-                curl $REGISTRY_URL && {
-                  sed 's_^ExecStart\(.*\)$_ExecStart\1 --registry-mirror=http://172.30.3.3:5000_g' < /lib/systemd/system/docker.service > /etc/systemd/system/docker.service
-                } || {
-                  echo "pull through registry not active"
-                }
-                systemctl start docker
-                systemctl enable docker
-                usermod -aG docker $USERNAME
-              permissions: '0700'
-            - path: $HOMEDIR/post-receive
-              owner: $USERNAME 
-              permissions: '0755'
-              content: |
-                #!/usr/bin/env bash
-                # Based on:
-                # http://krisjordan.com/essays/setting-up-push-to-deploy-with-git
-                # https://gist.github.com/noelboss/3fe13927025b89757f8fb12e9066f2fa
-
-                while read oldrev newrev ref ; do
-
-                if [[ $ref =~ .*/master$ ]]; then
-                git --work-tree=/deploy checkout -f
-                cd /deploy
-                [ -e run.sh ] && ./run.sh
-                fi
+                rm -f /tmp/fetched_keys
                 done
-            - path: /root/setup-deploy-repository.sh
-              owner: root
-              permissions: '0755'
+            - owner: root:root
+              path: /root/.ssh/id_ecdsa
+              permissions: '0600'
               content: |
-                #!/usr/bin/env bash
-                mkdir /deploy
-                chown $USERNAME /deploy
-                git init --bare /repo
-                mv $HOMEDIR/post-receive /repo/hooks
-                chown -R $USERNAME /repo
-                touch $AUTHKEYS_LOCATION
-                chmod 0600 $AUTHKEYS_LOCATION
-                curl $AUTHKEYS_URL >> $AUTHKEYS_LOCATION
-            runcmd:
-              - /root/setup-proxy-and-install-docker.sh
-              - /root/setup-deploy-repository.sh
-          params:
-            $USERNAME: { get_param: username }
-            $HOMEDIR: { get_param: homedir }
-            $AUTHKEYS_LOCATION: { get_param: authkeys_location }
-            $AUTHKEYS_URL: { get_param: authkeys_url }
-            $APT_PROXY_URL: { get_param: apt_proxy_url }
-            $LOCAL_REGISTRY_URL: { get_param: local_registry_url }
-            $STACK_NAME: { get_param: 'OS::stack_name' }
+                 -----BEGIN EC PRIVATE KEY-----
+                 MHcCAQEEILtnwzkt0Hz1MzfkOrIGn14bfu/y0iY6lS0b1O1SmaWZoAoGCCqGSM49
+                 AwEHoUQDQgAE+zHZb2S2eL9ipD6WFFiSW6PpomyUQbmvbu+YoLY2v3DpkmRu2BQW
+                 9ent/QwE9gAB0kgZS98WfTZiAlCqV04/jg==
+                 -----END EC PRIVATE KEY-----
+            - owner: root:root
+              path: /root/.ssh/known_hosts
+              permissions: '0600'
+              content: "$DEPLOY_REPOSITORY_HOST_KEY"
 
+            runcmd:
+            - apt-get install -y --no-install-recommends apt-transport-https ca-certificates curl software-properties-common
+            - curl -fsSL https://apt.dockerproject.org/gpg | apt-key add -
+            - add-apt-repository "deb https://apt.dockerproject.org/repo/ debian-$(lsb_release -cs) main"
+            - apt-get update
+            - apt-get install -y python-pip docker-engine
+            - pip install docker-compose --user
+            - cd / && git clone $DEPLOY_REPOSITORY /code
+            - cd /code && /root/.local/bin/docker-compose up -d
+
+          params:
+            $DEPLOY_REPOSITORY: {get_param: deploy_repository }
+            $DEPLOY_REPOSITORY_HOST_KEY: {get_param: deploy_repository_host_key }
+            $STACK_NAME: {get_param: 'OS::stack_name'}
+            $AUTHKEYS_URL : {get_param: authkeys_url }
