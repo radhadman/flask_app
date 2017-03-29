@@ -22,6 +22,6 @@ def retrievePosts():
     con = sql.connect("database.db")
     cur = con.cursor()
     cur.execute("SELECT blogpost FROM posts")
-    users = cur.fetchall()
+    posts = cur.fetchall()
     con.close()
     return posts

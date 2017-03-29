@@ -5,7 +5,7 @@ import models
 app = Flask(__name__)
 
 # config
-app.secret_key = 'lab1key'
+app.secret_key = 'assign2key'
 
 # login decorator
 def login_required(f):
