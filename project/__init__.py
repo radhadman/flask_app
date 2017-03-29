@@ -1,6 +1,7 @@
+import models
 from flask import Flask, Response, render_template, redirect, url_for, request, session, flash
 from functools import wraps
-import models
+
 
 app = Flask(__name__)
 
@@ -64,6 +65,7 @@ def posts():
 # start the server with the 'run()' method
 if __name__ == '__main__':
     app.run(debug=True)
+	app.run()
 	
 
         
