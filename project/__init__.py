@@ -33,8 +33,7 @@ def out():
 def login():
     error = None
     if request.method == 'POST':
-        if request.form['username'] != 'admin' or 
-		request.form['password'] != 'admin':
+        if request.form['username'] != 'admin' or request.form['password'] != 'admin':
             error = 'Invalid username/password. Please try again.'
         else:
             session['logged_in'] = True
