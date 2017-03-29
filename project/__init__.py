@@ -49,7 +49,7 @@ def logout():
     return redirect(url_for('out'))
 	
 	
-@app.route('/posts', methods=['POST', 'GET'])
+@app.route('/posts')
 def posts():
     if request.method == 'POST':
         name = request.form['name']
