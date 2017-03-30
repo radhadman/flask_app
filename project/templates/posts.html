@@ -28,9 +28,9 @@
 	  
 	  {%if posts%}
 	<h3>Recent comments</h3>
-	<ul list-style-type: "none">
+	<ul>
 		{%for post in posts%}
-		<li>{{post[0]}}</li>
+		<li list-style-type: "none">{{post[0]}}</li>
 		{%endfor%}
 	</ul>
 	{%endif%}
