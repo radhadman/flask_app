@@ -51,15 +51,16 @@ def logout():
 	
 	
 @app.route('/posts', methods=['POST', 'GET'])
-def add_entry():
-    if not session.get('logged_in'):
-        abort(401)
-    cur = get_db()
-    cur.execute('insert into posts (name, comment) values (?, ?)',
-                 [request.form['name'], request.form['comment']])
-    db.commit()
-    flash('New entry was successfully posted')
-    return redirect(url_for('posts'))
+def posts():
+    if request.method == 'POST':
+        name = request.form['name']
+        comment = request.form['comment']
+        models.insertPost(name, comment)
+        return render_template('posts.html')
+    else:
+        posts = models.retrievePosts()
+        return render_template('posts.html', posts=posts)
+		return redirect(url_for('posts'))
 	
 
 # start the server with the 'run()' method
