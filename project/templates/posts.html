@@ -29,8 +29,13 @@
 	  
 	<h3>Recent comments</h3>
 	<ul style="list-style-type: circle">
-		
-		<li>Name:</li>
+		{{ for post in posts }}
+		<li>Name - {{ posts[0] }}
+		<br>
+		Comment - {{ posts[1] }}
+		<br>
+		</li>
+		{{ endfor }}
 		
 	</ul>
 	
