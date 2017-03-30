@@ -26,11 +26,11 @@
       </form>
       <br>
 	  
-	  {%if posts%}
+	  
 	<h3>Recent comments</h3>
 	<ul>
 		{%for post in posts%}
-		<li list-style-type: "none">{{post[0]}}</li>
+		<li style=list-style-type: "none">{{post[0]}}</li>
 		{%endfor%}
 	</ul>
 	{%endif%}
