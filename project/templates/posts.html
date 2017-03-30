@@ -29,9 +29,10 @@
 	  
 	<h3>Recent comments</h3>
 	<ul style="list-style-type: circle">
-		{%for yes in posts%}
-		<li>{{yes[0]}}</li>
-		{%endfor%}
+		{%if posts%}
+		<li>{{name[0]}}</li>
+		<li>{{comment[0]></li>
+		{%endif%}
 	</ul>
 	
 </body>
