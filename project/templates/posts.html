@@ -29,8 +29,8 @@
 	  
 	<h3>Recent comments</h3>
 	<ul style="list-style-type: circle">
-		{%for all in posts%}
-		<li>{{all[0]}}</li>
+		{%for post in posts%}
+		<li>{{ post }}</li>
 		{%endfor%}
 	</ul>
 	

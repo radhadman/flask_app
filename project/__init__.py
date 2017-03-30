@@ -56,7 +56,7 @@ def posts():
         name = request.form['name']
         comment = request.form['comment']
         models.insertPost(name, comment)
-        return render_template('posts.html', posts=posts)
+        return render_template('posts.html')
     else:
         posts = models.retrievePosts()
         return render_template('posts.html', posts=posts)
