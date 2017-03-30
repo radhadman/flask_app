@@ -60,8 +60,7 @@ def posts():
     else:
         posts = models.retrievePosts()
         return render_template('posts.html', posts=posts)
-		return redirect(url_for('posts'))
-	
+			
 
 # start the server with the 'run()' method
 if __name__ == '__main__':
