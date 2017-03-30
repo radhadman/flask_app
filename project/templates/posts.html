@@ -19,8 +19,8 @@
 	  <br>
 	  <p>Name:  <input type="text" name="name" placeholder="Your name..."? required></p>
 	  <p>Comment:</p>
-	  <textarea placeholder="Your comment..." name="comment" style="resize: none" rows="5" cols="50" type="text" 
-		required></textarea></p>
+	  <input><textarea placeholder="Your comment..." name="comment" style="resize: none" rows="5" cols="50" type="text" 
+		required></textarea></p><input>
 		
          <input class="btn btn-default" type="submit" value="Submit">
       </form>
@@ -30,7 +30,7 @@
 	<h3>Recent comments</h3>
 	<ul style="list-style-type: circle">
 		{%for post in posts%}
-		<li>{{post[post]}}</li>
+		<li>{{post[0]}}</li>
 		{%endfor%}
 	</ul>
 	
