@@ -1,7 +1,6 @@
 import sqlite3 as sql
 
 q = """
-DROP TABLE IF EXISTS database.db.posts
 CREATE TABLE IF NOT EXISTS posts (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
