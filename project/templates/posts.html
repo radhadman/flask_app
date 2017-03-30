@@ -25,10 +25,10 @@
          <input class="btn btn-default" type="submit" value="Submit">
       </form>
       <br>
-	  <br>
+	  
 	  {%if posts%}
-	<h1>Recent comments</h1>
-	<ul>
+	<h3>Recent comments</h3>
+	<ul list-style-type: "none">
 		{%for post in posts%}
 		<li>{{post[0]}}</li>
 		{%endfor%}
