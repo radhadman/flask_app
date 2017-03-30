@@ -30,9 +30,10 @@
 	
 	<ul style="list-style-type: circle">
 		{% for post in posts %}
-		<li>Name - {{ posts[0] }}
+		<li>Name - {{ post[0] }}
 		<br>
-		Comment - {{ posts[1] }}
+		Comment - {{ post[1] }}
+		<br>
 		<br>
 		</li>
 		{% endfor %}
