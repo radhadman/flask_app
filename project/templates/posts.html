@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Assignment 2</title>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="static/main.css" rel="stylesheet" media="screen">
+  </head>
+  <body>
+  <div class="container">
+  
+      <h1>Posts</h1>
+      <p>You are logged in.</p>
+	  <br>
+	  <p>Click <a href="/logout">here</a> to logout.</p>
+	  <p>Click <a href="/">here</a> to go back.</p>
+	  <br>
+	   <form action="/posts" method="POST">Use the form below to submit a post:
+	  <br>
+	  <br>
+	  <p>Name:  <input type="text" name="name" placeholder="Your name..."? required></p>
+	  <p>Comment:</p>
+	  <textarea placeholder="Your comment..." name="comment" style="resize: none" rows="5" cols="50" type="text" 
+		required></textarea>
+		<br>		
+      <input class="btn btn-default" type="submit" value="Submit">
+      </form>
+      <br>
+	  	  
+	<h3>Recent comments</h3>
+	{% if posts %}
+	<ul style="list-style-type: circle">
+		{% for post in posts %}
+		<li><i>Name</i> - {{ post[0] }}
+		<br>
+		<i>Comment</i> - {{ post[1] }}
+		<br>
+		<br>
+		</li>
+		{% endfor %}
+		{% endif %}
+	</ul>
+	
+</body>
+</html>
