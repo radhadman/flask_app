@@ -44,6 +44,7 @@ def deletePost():
 	con = sql.connect("database.db")
 	cur = con.cursor()
 	cur.execute("DELETE FROM posts (name,comment) WHERE name=? AND comment=?")
-	con.commit()
+	posts = cur.fetchall()
     con.close()
+	return posts
 	
