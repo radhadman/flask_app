@@ -8,13 +8,13 @@
   
   <div class="container">
   
-      <h1>Posts</h1>
+      <h1>Post reply</h1>
       <p>You are logged in.</p>
 	  <br>
 	  <p>Click <a href="/logout">here</a> to logout.</p>
-	  <p>Click <a href="/">here</a> to go back.</p>
+	  <p>Click <a href="/posts">here</a> to return to posts.</p>
 	  <br>
-	   <form action="/posts" method="POST">Use the form below to submit a post:
+	   <form action="/reply" method="POST">Use the form below to submit your reply:
 	  <br>
 	  <br>
 	  <p>Name:  <input type="text" name="name" placeholder="Your name..."? required></p>
@@ -25,25 +25,3 @@
       <input class="btn btn-default" type="submit" value="Submit">
       </form>
       <br>
-	  	  
-	<h3>Recent comments</h3>
-	<br>
-	{% for message in get_flashed_messages() %}
-        {{ message }}
-      {% endfor %}
-	{% if posts %}
-	
-	<ul style= "list-style-type:none">
-		{% for x in posts %}
-		<li><p style="color:#737373; font-size:175%; display:inline;">{{ x[0] }}</p> said:<p style="color:#5900b3; font-size:125%">- {{ post[1] }}</p>
-		<form method="DELETE"><a style="font-size:75%" href="/posts">Delete post</a></form>
-		<br>
-		<br>
-		</li>
-		{% endfor %}
-		{% endif %}
-	</ul>
-	
-	
-</body>
-</html>

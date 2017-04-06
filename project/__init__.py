@@ -49,13 +49,26 @@ def logout():
     return redirect(url_for('out'))
 	
 	
-@app.route('/posts', methods=['POST', 'GET'])
+@app.route('/posts', methods=['POST', 'GET')
 def posts():
     if request.method == 'POST':
         name = request.form['name']
         comment = request.form['comment']
         models.insertPost(name, comment)
+		flash('Post submitted.')
         return render_template('posts.html')
+    else:
+        posts = models.retrievePosts()
+        return render_template('posts.html', posts=posts)
+		
+		
+@app.route('/reply', methods=['POST', 'GET')
+def reply():
+    if request.method == 'POST':
+        name = request.form['name']
+        comment = request.form['comment']
+        models.insertReply(name, comment)
+        return render_template('reply.html')
     else:
         posts = models.retrievePosts()
         return render_template('posts.html', posts=posts)
