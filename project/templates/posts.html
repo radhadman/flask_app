@@ -29,17 +29,17 @@
 	<h3>Recent comments</h3>
 	<br>
 	{% if posts %}
-	<div class="container">
-	<ul style="list-style-image: url('project/project/templates/bubble.png')">
+	
+	<ul style="list-style-image: url('bubble.gif')">
 		{% for post in posts %}
-		<li><p style="color:#999999; font-weight: bold; font-size:150%"><i>{{ post[0] }}</i><p style="color:#6600cc">{{ post[1] }}</p>
+		<li><p style="color:#999999; font-size:150%"><i>{{ post[0] }}</i><p style="color:#6600cc">{{ post[1] }}</p>
 		<br>
 		<br>
 		</li>
 		{% endfor %}
 		{% endif %}
 	</ul>
-	</div>
+	
 	
 </body>
 </html>
