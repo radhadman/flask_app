@@ -62,16 +62,7 @@ def posts():
         return render_template('posts.html', posts=posts)
 		
 		
-@app.route('/reply', methods=['POST', 'GET')
-def reply():
-    if request.method == 'POST':
-        name = request.form['name']
-        comment = request.form['comment']
-        models.insertReply(name, comment)
-        return render_template('reply.html')
-    else:
-        posts = models.retrievePosts()
-        return render_template('posts.html', posts=posts)
+
 			
 
 # start the server with the 'run()' method
