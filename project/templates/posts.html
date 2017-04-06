@@ -29,7 +29,7 @@
 	<h3>Recent comments</h3>
 	
 	{% for message in get_flashed_messages() %}
-        {{ message[0] }}
+        {{ message[0-5] }}
       {% endfor %}	
 	{% if posts %}
 	
