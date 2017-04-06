@@ -45,6 +45,6 @@ def deletePost():
 	cur = con.cursor()
 	cur.execute("DELETE FROM posts (name,comment) WHERE name=? AND comment=?")
 	posts = cur.fetchall()
-    con.close()
+	con.close()
 	return posts
 	
