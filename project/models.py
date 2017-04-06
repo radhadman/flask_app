@@ -1,5 +1,11 @@
 import sqlite3 as sql
 
+
+x = """
+DELETE TABLE IF EXISTS posts;
+"""
+
+
 q = """
 CREATE TABLE IF NOT EXISTS posts (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -10,7 +16,13 @@ CREATE TABLE IF NOT EXISTS posts (
 
 con = sql.connect("database.db")
 cur = con.cursor()
+cur.execute(x)
+
+
+con = sql.connect("database.db")
+cur = con.cursor()
 cur.execute(q)
+
 
 def insertPost(name,comment):
     con = sql.connect("database.db")
@@ -18,6 +30,7 @@ def insertPost(name,comment):
     cur.execute("INSERT INTO posts (name,comment) VALUES (?,?)",(name,comment))
     con.commit()
     con.close()
+	
 
 def retrievePosts():
     con = sql.connect("database.db")
