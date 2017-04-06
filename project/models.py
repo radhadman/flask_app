@@ -8,8 +8,6 @@ CREATE TABLE IF NOT EXISTS posts (
 );
 """
 
-
-
 con = sql.connect("database.db")
 cur = con.cursor()
 cur.execute(q)

@@ -61,9 +61,6 @@ def posts():
         return render_template('posts.html', posts=posts)
 		
 		
-
-			
-
 # start the server with the 'run()' method
 if __name__ == '__main__':
     app.run(debug=True)
