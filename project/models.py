@@ -4,8 +4,7 @@ q = """
 CREATE TABLE IF NOT EXISTS posts (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
-    comment TEXT NOT NULL,
-	reply TEXT NOT NULL
+    comment TEXT NOT NULL
 );
 """
 
@@ -29,5 +28,3 @@ def retrievePosts():
     posts = cur.fetchall()
     con.close()
     return posts
-
-
