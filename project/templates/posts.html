@@ -31,8 +31,8 @@
 	{% if posts %}
 	
 	<ul style= "list-style-type:none">
-		{% for post in posts %}
-		<li><p style="color:#737373; font-size:175%; display:inline;">{{ post[0] }}</p> said:<p style="color:#5900b3; font-size:125%">- {{ post[1] }}</p>
+		{% for x in posts %}
+		<li><p style="color:#737373; font-size:175%; display:inline;">{{ x[0] }}</p> said:<p style="color:#5900b3; font-size:125%">- {{ post[1] }}</p>
 		<form><a style="font-size:75%" href="/posts">Delete post</a></form>
 		<br>
 		<br>
