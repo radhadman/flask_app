@@ -12,7 +12,7 @@ con = sql.connect("database.db")
 cur = con.cursor()
 cur.execute(q)
 
-# adapted from: https://gist.github.com/PolBaladas/07bfcdefb5c1c57cdeb5
+
 
 def insertPost(name,comment):
     con = sql.connect("database.db")
@@ -28,3 +28,10 @@ def retrievePosts():
     posts = cur.fetchall()
     con.close()
     return posts
+
+def deletePost():
+	con = sql.connect("database.db")
+	cur = con.cursor()
+	cur.execute("DELETE FROM posts (name,comment) VALUES (?,?)", (name, comment))
+	con.commit()
+	con.close()
