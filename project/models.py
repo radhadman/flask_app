@@ -30,9 +30,4 @@ def retrievePosts():
     con.close()
     return posts
 
-def insertReply():
-	con = sql.connect("database.db")
-	cur = con.cursor()
-	cur.execute("INSERT INTO posts (name2,reply) VALUES (?,?)", (name2, reply))
-	con.commit()
-	con.close()
+
