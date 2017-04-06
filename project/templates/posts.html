@@ -27,7 +27,10 @@
       <br>
 	  	  
 	<h3>Recent comments</h3>
-	<br>	
+	<br>
+	{% for message in get_flashed_messages() %}
+        {{ message }}
+      {% endfor %}	
 	{% if posts %}
 	
 	<ul style= "list-style-type:none">
