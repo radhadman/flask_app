@@ -25,11 +25,11 @@
       <input class="btn btn-default" type="submit" value="Submit">
       </form>
       <br>
-	  	{% for message in get_flashed_messages() %}
-        {{ message }}
-      {% endfor %}	  
+	  	  
 	<h3>Recent posts</h3>
-	
+	{% for message in get_flashed_messages() %}
+        {{ message }}
+      {% endfor %}	
 	
 	{% if posts %}
 	
@@ -46,6 +46,6 @@
 	</ul>
 	
 	
-	
+</div>
 </body>
 </html>
