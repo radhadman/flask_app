@@ -11,8 +11,8 @@
       <h1>Posts</h1>
       <p>You are logged in.</p>
 	  <br>
-	  <p>Click <a href="/logout">here</a> to logout.</p>
-	  <p>Click <a href="/">here</a> to go back.</p>
+	  <p style="text-align:right"><a href="/logout">Logout</a></p>
+	  <p style="text-align:right">Click <a href="/">Back</a></p>
 	  <br>
 	   <form action="/posts" method="POST">Use the form below to submit a post:
 	  <br>
@@ -28,7 +28,7 @@
 	  	{% for message in get_flashed_messages() %}
         {{ message }}
       {% endfor %}	  
-	<h3>Recent comments</h3>
+	<h3>Recent posts</h3>
 	
 	
 	{% if posts %}
