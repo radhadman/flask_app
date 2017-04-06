@@ -25,18 +25,18 @@
       <input class="btn btn-default" type="submit" value="Submit">
       </form>
       <br>
-	  	  
+	  	{% for message in get_flashed_messages() %}
+        {{ message }}
+      {% endfor %}	  
 	<h3>Recent comments</h3>
 	
-	{% for message in get_flashed_messages() %}
-        {{ message }}
-      {% endfor %}	
+	
 	{% if posts %}
 	
 	<ul style= "list-style-type:none">
 		{% for x in posts %}
 		<li><p style="color:#737373; font-size:150%; display:inline;">{{ x[0] }}</p> said:<p style="color:#5900b3;">- {{ x[1] }}</p>
-		<form><a style="font-size:75%" href="/posts">Delete post</a></form>
+		<form method='POST'><a style="font-size:75%" href="/posts">Delete post</a></form>
 		<br>
 		<br>
 		</li>
