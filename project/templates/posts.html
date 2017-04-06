@@ -5,7 +5,7 @@
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="static/main.css" rel="stylesheet" media="screen">
   </head>
-  <body>
+  <body style="background-image: url('bubble.png')">
   <div class="container">
   
       <h1>Posts</h1>
@@ -32,7 +32,7 @@
 	
 	<ul style="list-style-image: url('C:\Users\Radhadman\cis245\project\project\templates\bubble.png')">
 		{% for post in posts %}
-		<li style="display: block"><p style="color:#737373; font-size:175%; display:inline;">{{ post[0] }}</p> said:<p style="color:#5900b3">{{ post[1] }}</p>
+		<li><p style="color:#737373; font-size:175%; display:inline;">{{ post[0] }}</p> said:<p style="color:#5900b3">{{ post[1] }}</p>
 		<br>
 		<br>
 		</li>
