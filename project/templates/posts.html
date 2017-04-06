@@ -28,7 +28,7 @@
 	  	  
 	<h3>Recent comments</h3>
 	
-	{% for message in get_flashed_messages(0) %}
+	{% for message in get_flashed_messages(1) %}
         {{ message }}
       {% endfor %}	
 	{% if posts %}
