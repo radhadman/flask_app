@@ -53,6 +53,7 @@ def logout():
 def posts():
     if request.method == 'POST':
 	flash('Post submitted.')
+	flash('View posts')
         name = request.form['name']
         comment = request.form['comment']
         models.insertPost(name, comment)

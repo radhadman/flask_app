@@ -28,9 +28,10 @@
 	  	  
 	<h3>Recent comments</h3>
 	<br>
-	{% for message in get_flashed_messages() %}
-        {{ message }}
-      {% endfor %}	
+	{% if get_flashed_messages() %}
+        {{ message[0] }}
+		<p style="text-align: center"> <a href="/posts">{{ message[1] }}</a></p>
+      {% endif %}	
 	{% if posts %}
 	
 	<ul style= "list-style-type:none">
