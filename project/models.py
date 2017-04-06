@@ -2,7 +2,7 @@ import sqlite3 as sql
 
 
 x = """
-DELETE TABLE IF EXISTS posts;
+DROP TABLE IF EXISTS posts;
 """
 
 
