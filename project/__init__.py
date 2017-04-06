@@ -49,7 +49,7 @@ def logout():
     return redirect(url_for('out'))
 	
 	
-@app.route('/posts', methods=['POST', 'GET')
+@app.route('/posts', methods=['POST', 'GET'])
 def posts():
     if request.method == 'POST':
         name = request.form['name']
@@ -64,7 +64,3 @@ def posts():
 # start the server with the 'run()' method
 if __name__ == '__main__':
     app.run(debug=True)
-	
-	
-
-        
