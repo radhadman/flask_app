@@ -30,9 +30,9 @@
 	<br>
 	{% if posts %}
 	
-	<ul style="list-style-type: url('C:\Users\Radhadman\cis245\project\project\templates\bubble.png')">
+	<ul style= "list-style-type:none">
 		{% for post in posts %}
-		<li><p style="color:#737373; font-size:175%; display:inline;">{{ post[0] }}</p> said:<p style="color:#5900b3">{{ post[1] }}</p>
+		<li style="before: '-'"><p style="color:#737373; font-size:175%; display:inline;">{{ post[0] }}</p> said:<p style="color:#5900b3">{{ post[1] }}</p>
 		<br>
 		<br>
 		</li>
