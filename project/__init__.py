@@ -52,7 +52,7 @@ def logout():
 @app.route('/posts', methods=['POST', 'GET'])
 def posts():
     if request.method == 'POST':
-        flash('Post submitted!')
+        flash('Your post was submitted!')
         name = request.form['x']
         comment = request.form['y']
         models.insertPost(name, comment)
@@ -65,13 +65,15 @@ def posts():
 
 @app.route('/deleterequest', methods=['POST', 'GET'])
 def deleterequest():
-        return render_template('delete.html')
+    if request.method == 'POST':
+	    flash('Post successfully deleted.')
+        id = request.form['id']
+        models.deletePost(id)
 
 
 @app.route('/deletepost', methods=['POST', 'GET'])
 def deletepost():
     if request.method == 'POST':
-        flash('Post deleted.')
         id = request.form['id']
         models.deletePost(id)
         posts = models.retrievePosts()
