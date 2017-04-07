@@ -59,7 +59,7 @@ def posts():
         posts = models.retrievePosts()
         return render_template('posts.html', posts=posts)
 	if request.method == 'GET':
-	flash('Post deleted.')
+		flash('Post deleted.')
         id = request.form['id']
         models.deletePost(id)
         posts = models.retrievePosts()
