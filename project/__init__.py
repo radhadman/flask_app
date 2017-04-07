@@ -63,7 +63,7 @@ def posts():
         return render_template('posts.html', posts=posts)
 
 
-@app.route('/deletepost', methods=['POST', 'GET'])
+@app.route('/deletepost', methods=['GET'])
 def delete():
     if request.method == 'POST':
         id = request.form['id']
