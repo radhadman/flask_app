@@ -52,7 +52,7 @@ def logout():
 @app.route('/posts', methods=['POST', 'GET'])
 def posts():
     if request.method == 'POST':
-        flash('Your post was submitted.')
+        flash('Your post was submitted!')
         name = request.form['x']
         comment = request.form['y']
         models.insertPost(name, comment)

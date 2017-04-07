@@ -13,9 +13,9 @@
 	  <p><a href="/logout">Logout</a></p>
 	  
 	  <br>
-	   <form action="/deleterequest" method="POST" style="display: inline">Are you sure you want to delete this post?
+	   <form action="/deletepost" method="POST" style="display: inline">Are you sure you want to delete this post?
 	  
-	  <a href="/posts" style="font-color: black;">Delete</a><p style="display: inline"> or </p></form><a href="/posts">Cancel</a>
+	  <a href="/deleterequest" style="font-color: black;">Delete</a><p style="display: inline"> or </p></form><a href="/posts">Cancel</a>
 		{% for message in get_flashed_messages() %}
         {{ message }}
       {% endfor %}
