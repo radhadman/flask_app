@@ -30,8 +30,6 @@ def insertPost(name,comment):
     cur.execute("INSERT INTO posts (name,comment) VALUES (?,?)",(name,comment))
     con.commit()
 	con.close()
-	posts = cur.fetchall()
-	return posts
 	
 
 def retrievePosts():
