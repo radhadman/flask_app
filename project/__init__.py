@@ -73,7 +73,7 @@ def deletepost():
     if request.method == 'POST':
         id = request.form['id']
         models.deletePost(id)
-        return render_template('deleterequest.html', posts=posts)
+        return render_template('deleterequest.html')
 
 
 # start the server with the 'run()' method
