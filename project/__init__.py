@@ -67,8 +67,14 @@ def posts():
     else:
         posts = models.retrievePosts()
         return render_template('posts.html', posts=posts)
-		
-		
+
+
+@app.route('/deletepost'), methods=['POST', 'GET'])
+def delete():
+    if request.method == 'POST':
+		flash('Post deleted.')
+
+
 # start the server with the 'run()' method
 if __name__ == '__main__':
     app.run(debug=True)
