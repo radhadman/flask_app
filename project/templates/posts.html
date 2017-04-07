@@ -35,7 +35,7 @@
 	<ul style= "list-style-type:none">
 		{% for x in posts %}
 		<li><p style="color:#737373; font-size:150%; display:inline;">{{ x[0] }}</p> said:<p style="color:#5900b3;">- {{ x[1] }}</p>
-		<form method="GET"><input name="delete" >
+		<form method="POST"><input name="delete" >
 		<a style="font-size:75%; display: inline">Delete post</a></form>
 		<br>
 		<br>
