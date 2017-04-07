@@ -71,8 +71,12 @@ def deleterequest():
 @app.route('/deletepost', methods=['POST', 'GET'])
 def deletepost():
     if request.method == 'POST':
-        flash('Post successfully deleted.')
         return render_template('delete.html')
+		
+@app.route('/deletesuccess', methods=['POST', 'GET'])
+def deletesuccess():
+    if request.method == 'POST':
+        return render_template('deleteSuccess.html')
 
 
 # start the server with the 'run()' method
