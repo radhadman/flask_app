@@ -17,9 +17,9 @@
 	   <form action="/posts" method="POST">Use the form below to submit a post:
 	  <br>
 	  <br>
-	  <p>Name:  <input type="text" name="name" placeholder="Your name..."? required></p>
+	  <p>Name:  <input type="text" name="x" placeholder="Your name..."? required></p>
 	  <p>Message:</p>
-	  <textarea placeholder="Your message..." name="comment" style="resize: none" rows="5" cols="50" type="text" 
+	  <textarea placeholder="Your message..." name="y" style="resize: none" rows="5" cols="50" type="text" 
 		required></textarea>
 		<br>		
       <input class="btn btn-default" type="submit" value="Submit">
@@ -35,7 +35,8 @@
 	<ul style= "list-style-type:none">
 		{% for x in posts %}
 		<li><p style="color:#737373; font-size:150%; display:inline;">{{ x[0] }}</p> said:<p style="color:#5900b3;">- {{ x[1] }}</p>
-		<form method="GET" name="delete" style="display: inline"><a style="font-size:75%" href="/posts">Delete post</a></form>
+		<form method="GET"><input name="delete" >
+		<a style="font-size:75%; display: inline">Delete post</a></form>
 		<br>
 		<br>
 		</li>

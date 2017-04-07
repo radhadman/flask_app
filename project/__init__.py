@@ -53,8 +53,8 @@ def logout():
 def posts():
     if request.method == 'POST':
         flash('Post submitted!')
-        name = request.form['name']
-        comment = request.form['comment']
+        name = request.form['x']
+        comment = request.form['y']
         models.insertPost(name, comment)
         posts = models.retrievePosts()
         return render_template('posts.html', posts=posts)
