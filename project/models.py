@@ -29,6 +29,7 @@ def insertPost(name,comment):
     cur = con.cursor()
     cur.execute("INSERT INTO posts (name,comment) VALUES (?,?)",(name,comment))
     con.commit()
+    cur.execute("SELECT name, comment FROM posts")
     posts = cur.fetchall()
     con.close()
     return posts
