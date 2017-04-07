@@ -58,8 +58,14 @@ def posts():
         models.insertPost(name, comment)
         posts = models.retrievePosts()
         return render_template('posts.html', posts=posts)
-    else:
+    if request.method == 'GET':
+    flash('Post deleted.')
+        id = request.form['id']
+        models.deletePost(id)
         posts = models.retrievePosts()
+        return render_template('posts.html', posts=posts)
+    else:
+	    posts = models.retrievePosts()
         return render_template('posts.html', posts=posts)
 		
 		
