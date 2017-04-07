@@ -65,7 +65,7 @@ def posts():
 
 @app.route('/deleterequest', methods=['POST', 'GET'])
 def delete():
-        return render_template('deletepost.html')
+        return render_template('delete.html')
 
 
 # start the server with the 'run()' method
