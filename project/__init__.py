@@ -5,7 +5,7 @@ from functools import wraps
 app = Flask(__name__)
 
 # config
-app.secret_key = 'assign2key'
+app.secret_key = 'project'
 
 # login decorator
 def login_required(f):
@@ -52,7 +52,7 @@ def logout():
 @app.route('/posts', methods=['POST', 'GET'])
 def posts():
     if request.method == 'POST':
-        flash('Your post was submitted!')
+        flash('Your post was submitted.')
         name = request.form['x']
         comment = request.form['y']
         models.insertPost(name, comment)
@@ -65,15 +65,15 @@ def posts():
 
 @app.route('/deleterequest', methods=['POST', 'GET'])
 def deleterequest():
-    if request.method == 'POST':
-	    flash('Post successfully deleted.')
-        id = request.form['id']
-        models.deletePost(id)
-        return render_template('deleterequest.html', posts=posts)
+        return render_template('deleterequest.html')
+
 
 @app.route('/deletepost', methods=['POST', 'GET'])
 def deletepost():
     if request.method == 'POST':
+        id = request.form['id']
+        models.deletePost(id)
+        return render_template('deleterequest.html', posts=posts)
 
 
 # start the server with the 'run()' method
