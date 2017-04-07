@@ -12,13 +12,14 @@
       <p>You are logged in.</p>
 	  <p><a href="/logout">Logout</a></p>
 	  <br>
-	  {% for post in posts %}
-	   <form action="/posts" method="POST" style="display: inline">Are you sure you want to delete this post?
 	  
+	   <form action="/posts" method="POST" style="display: inline">Are you sure you want to delete this post?
+	  {% for post in posts %}
 	  <a href="/deletepost?id={{ post.id }}"><input type="submit" name="id" value="Delete"></a><p style="display: inline"> or </p></form><a href="/posts">Cancel</a>
+		{% endfor %}
+		
 		{% for message in get_flashed_messages() %}
         {{ message }}
-      {% endfor %}
 	  {% endfor %}
 	  </div>
 </body>
