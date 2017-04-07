@@ -29,7 +29,9 @@ def insertPost(name,comment):
     cur = con.cursor()
     cur.execute("INSERT INTO posts (name,comment) VALUES (?,?)",(name,comment))
     con.commit()
-    con.close()
+	con.close()
+	posts = cur.fetchall()
+	return posts
 	
 
 def retrievePosts():
@@ -40,11 +42,11 @@ def retrievePosts():
     con.close()
     return posts
 	
-def deletePost():
+def deletePost(id):
 	con = sql.connect("database.db")
 	cur = con.cursor()
-	cur.execute("DELETE FROM posts (name,comment) WHERE name=? ANDfdsa comment=?")
-	posts = cur.fetchall()
+	cur.execute("DELETE FROM posts (name,comment) WHERE id=?",(id))
+	con.commit()
 	con.close()
-	return posts
+	
 	
