@@ -31,6 +31,7 @@ def insertPost(name,comment):
     con.commit()
     cur.execute("SELECT name, comment FROM posts")
     posts = cur.fetchall()
+    con.commit()
     con.close()
     return posts
 	
