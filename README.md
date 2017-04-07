@@ -6,4 +6,10 @@ Project features the following modifications from Assignment 2:
 - changed size and wording of webpage nagivation links
 - "top of page" function added to page for convenience
 
+if request.method == 'POST':
+        id = request.form['id']
+		models.deletePost(id)
+        posts = models.retrievePosts()
+        return render_template('deletepost.html', posts=posts)
+
 
