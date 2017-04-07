@@ -51,20 +51,20 @@ def logout():
 	
 @app.route('/posts', methods=['POST', 'GET'])
 def posts():
-    if request.method == 'POST':
+	if request.method == 'POST':
 	flash('Post submitted!')
         name = request.form['name']
         comment = request.form['comment']
         models.insertPost(name, comment)
         posts = models.retrievePosts()
         return render_template('posts.html', posts=posts)
-    if request.method == 'GET':
-    flash('Post deleted.')
+	if request.method == 'GET':
+	flash('Post deleted.')
         id = request.form['id']
         models.deletePost(id)
         posts = models.retrievePosts()
         return render_template('posts.html', posts=posts)
-    else:
+	else:
 	    posts = models.retrievePosts()
         return render_template('posts.html', posts=posts)
 		
