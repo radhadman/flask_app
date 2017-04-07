@@ -69,15 +69,11 @@ def deleterequest():
 	    flash('Post successfully deleted.')
         id = request.form['id']
         models.deletePost(id)
-
+        return render_template('deleterequest.html', posts=posts)
 
 @app.route('/deletepost', methods=['POST', 'GET'])
 def deletepost():
     if request.method == 'POST':
-        id = request.form['id']
-        models.deletePost(id)
-        posts = models.retrievePosts()
-        return render_template('deletepost.html', posts=posts)
 
 
 # start the server with the 'run()' method
