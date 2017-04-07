@@ -70,7 +70,7 @@ def delete():
         id = request.form['id']
         models.deletePost(id)
         posts = models.retrievePosts()
-        return render_template('posts.html', posts=posts)
+        return render_template('delete.html', posts=posts)
 
 
 # start the server with the 'run()' method
