@@ -52,8 +52,8 @@ def logout():
 @app.route('/posts', methods=['POST', 'GET'])
 def posts():
 	if request.method == 'POST':
-    flash('Post submitted!')
-        name = request.form['name']
+		flash('Post submitted!')
+		name = request.form['name']
         comment = request.form['comment']
         models.insertPost(name, comment)
         posts = models.retrievePosts()
