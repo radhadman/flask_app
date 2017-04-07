@@ -36,7 +36,7 @@
 		{% for post in posts %}
 		<li><p style="color:#737373; font-size:150%; display:inline;">{{ post[0] }}</p> said:<p style="color:#5900b3;">- {{ post[1] }}</p>
 		<form action="/deletepost" method="GET">
-		<a href="/posts?id={{ post.id }}" style="font-size:75%; display: inline">Delete post</a></form>
+		<a style="font-size:75%">Delete post</a></form>
 		<br>
 		<br>
 		</li>
