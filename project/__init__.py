@@ -16,19 +16,19 @@ def login_required(f):
         else:
             return redirect(url_for('login'))
     return wrap
-	
-	
+
+
 @app.route('/')
 @login_required
 def home():
 	return render_template('index.html')	
-	
+
 
 @app.route('/out')
 def out():
     return render_template('logout.html')
 
-	
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     error = None
@@ -40,18 +40,18 @@ def login():
             return redirect(url_for('home'))
     return render_template('login.html', error=error)
 
-	
+
 @app.route('/logout')
 @login_required
 def logout():
     session.pop('logged_in', None)
     flash('You have been logged out.')
     return redirect(url_for('out'))
-	
-	
+
+
 @app.route('/posts', methods=['POST', 'GET'])
 def posts():
-	if request.method == 'POST':
+    if request.method == 'POST':
     flash('Post submitted!')
         name = request.form['name']
         comment = request.form['comment']
@@ -65,7 +65,7 @@ def posts():
         posts = models.retrievePosts()
         return render_template('posts.html', posts=posts)
     else:
-	    posts = models.retrievePosts()
+        posts = models.retrievePosts()
         return render_template('posts.html', posts=posts)
 		
 		
