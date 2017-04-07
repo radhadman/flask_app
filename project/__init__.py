@@ -62,8 +62,6 @@ def posts():
         flash('Post deleted.')
         id = request.form['id']
         models.deletePost(id)
-        posts = models.retrievePosts()
-        return render_template('posts.html', posts=posts)
     else:
         posts = models.retrievePosts()
         return render_template('posts.html', posts=posts)
@@ -72,7 +70,11 @@ def posts():
 @app.route('/deletepost', methods=['POST', 'GET'])
 def delete():
     if request.method == 'POST':
-		flash('Post deleted.')
+        flash('Post deleted.')
+        id = request.form['id']
+        models.deletePost(id)
+        posts = models.retrievePosts()
+        return render_template('posts.html', posts=posts)
 
 
 # start the server with the 'run()' method

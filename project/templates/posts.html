@@ -33,10 +33,10 @@
 	{% if posts %}
 	
 	<ul style= "list-style-type:none">
-		{% for x in posts %}
-		<li><p style="color:#737373; font-size:150%; display:inline;">{{ x[0] }}</p> said:<p style="color:#5900b3;">- {{ x[1] }}</p>
-		<form method="POST"><input name="delete" >
-		<a style="font-size:75%; display: inline">Delete post</a></form>
+		{% for post in posts %}
+		<li><p style="color:#737373; font-size:150%; display:inline;">{{ post[0] }}</p> said:<p style="color:#5900b3;">- {{ post[1] }}</p>
+		<form action="/deletepost" method="POST">
+		<a href="/deletepost" name="id" style="font-size:75%; display: inline">Delete post</a></form>
 		<br>
 		<br>
 		</li>
