@@ -69,7 +69,7 @@ def posts():
         return render_template('posts.html', posts=posts)
 
 
-@app.route('/deletepost'), methods=['POST', 'GET'])
+@app.route('/deletepost', methods=['POST', 'GET'])
 def delete():
     if request.method == 'POST':
 		flash('Post deleted.')
