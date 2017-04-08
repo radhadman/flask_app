@@ -67,7 +67,7 @@ def delete():
     if request.method == 'GET':
         flash('Post successfully deleted.')
         id = request.form['z']
-        models.deletePost(z)
+        models.deletePost(id)
         posts = models.retrievePosts()
         return render_template('posts.html', posts=posts)
 
