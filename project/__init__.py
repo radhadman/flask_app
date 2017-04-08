@@ -22,7 +22,7 @@ def login_required(f):
 @login_required
 def home():
     flash('Welcome user.')
-	return render_template('index.html')	
+    return render_template('index.html')	
 
 
 @app.route('/out')

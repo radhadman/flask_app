@@ -7,5 +7,8 @@ Project features the following modifications from Assignment 2:
 - "top of page" function added to page for convenience
 - current date & time can be checked on posts page and home page
 
+- attempt made to add a "Like" and "Dislike" button but could not get it fully functioning (kept, but not working)
+- attempt was also made to add a deletePost function but also had troubles with this (removed)  
+
 
 
