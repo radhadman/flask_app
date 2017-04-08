@@ -65,19 +65,12 @@ def posts():
 
 @app.route('/deleterequest', methods=['POST', 'GET'])
 def deleterequest():
-        return render_template('delete.html')
-
-
-@app.route('/deletepost', methods=['POST', 'GET'])
-def deletepost():
     if request.method == 'POST':
-        return render_template('delete.html')
+        id = request.form['id']
+        models.deletePost(id)
+        posts = models.retrievePosts()
+        return render_template('deleteSuccess.html', posts=posts)
 		
-@app.route('/deletesuccess', methods=['POST', 'GET'])
-def deletesuccess():
-    if request.method == 'POST':
-        return render_template('deleteSuccess.html')
-
 
 # start the server with the 'run()' method
 if __name__ == '__main__':
