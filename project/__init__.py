@@ -73,7 +73,8 @@ def like():
         return render_template('posts.html', likes=likes)
     else:
         likes = models.retrieveLikes()
-        return render_template('posts.html', likes=likes)
+		posts = models.retrievePosts()
+        return render_template('posts.html', likes=likes, posts=posts)
 
 
 @app.route('/dislike', methods=['POST', 'GET'])
@@ -85,7 +86,8 @@ def dislike():
         return render_template('posts.html', dislikes=dislikes)
     else:
         dislikes = models.retrieveDislikes()
-        return render_template('posts.html', dislikes=dislikes)
+		posts = models.retrievePosts()
+        return render_template('posts.html', dislikes=dislikes, posts=posts)
 
 
 # start the server with the 'run()' method

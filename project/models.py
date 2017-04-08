@@ -11,8 +11,8 @@ CREATE TABLE IF NOT EXISTS posts (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
     comment TEXT NOT NULL,
-	likes SMALLINT,
-	dislikes SMALLINT
+	likes INTEGER,
+	dislikes INTEGER 
 );
 """
 
@@ -54,7 +54,8 @@ def insertLike(like):
 def retrieveLikes():
     con = sql.connect("database.db")
     cur = con.cursor()
-    likes = cur.execute("SELECT count(likes) FROM posts")
+    cur.execute("SELECT likes FROM posts")
+    likes = cur.fetchall()
     con.close()
     return likes
 
@@ -70,6 +71,7 @@ def insertDislike(dislike):
 def retrieveDislikes():
     con = sql.connect("database.db")
     cur = con.cursor()
-    dislikes = cur.execute("SELECT count(dislikes) FROM posts")
+    cur.execute("SELECT dislikes FROM posts")
+    dislikes = cur.fetchall()
     con.close()
     return dislikes

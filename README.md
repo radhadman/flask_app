@@ -6,6 +6,7 @@ Project features the following modifications from Assignment 2:
 - changed size and wording of webpage nagivation links
 - "top of page" function added to page for convenience
 - current date & time can be checked on posts page and home page
+- added a DROP TABLE query that refreshes the posts database every time a user logs in
 
 - attempt made to add a "Like" and "Dislike" button but could not get it fully functioning (kept, but not working)
 - attempt was also made to add a deletePost function but also had troubles with this (removed)  
