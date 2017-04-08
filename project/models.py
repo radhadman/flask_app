@@ -54,8 +54,7 @@ def insertLike(like):
 def retrieveLikes():
     con = sql.connect("database.db")
     cur = con.cursor()
-    cur.execute("SELECT count(likes) FROM posts")
-    likes = cur.fetchall("SELECT likes FROM posts")
+    likes = cur.execute("SELECT count(likes) FROM posts")
     con.close()
     return likes
 
@@ -71,7 +70,6 @@ def insertDislike(dislike):
 def retrieveDislikes():
     con = sql.connect("database.db")
     cur = con.cursor()
-    cur.execute("SELECT count(dislikes) FROM posts")
-    dislikes = cur.fetchall("SELECT dislikes FROM posts")
+    dislikes = cur.execute("SELECT count(dislikes) FROM posts")
     con.close()
     return dislikes
