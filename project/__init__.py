@@ -64,6 +64,7 @@ def posts():
 
 
 @app.route('/like', methods=['POST', 'GET'])
+def like():
     if request.method == 'POST':
         flash('You liked this post')
         like = request.form['l']
@@ -76,6 +77,7 @@ def posts():
 
 
 @app.route('/dislike', methods=['POST', 'GET'])
+def dislike():
     if request.method == 'POST':
         flash('You disliked this post')
         dislike = request.form['d']
