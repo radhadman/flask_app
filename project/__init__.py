@@ -58,8 +58,8 @@ def posts():
         models.insertPost(name, comment)
         posts = models.retrievePosts()
         return render_template('posts.html', posts=posts)
-	elif request.method == 'GET':
-	    render_template('delete.html')
+    elif request.method == 'GET':
+        render_template('delete.html')
     else:
         posts = models.retrievePosts()
         return render_template('posts.html', posts=posts)
