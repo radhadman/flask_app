@@ -35,8 +35,8 @@
 	<ul style= "list-style-type:none">
 		{% for post in posts %}
 		<li><p style="color:#737373; font-size:150%; display:inline;">{{ post[0] }}</p> said:<p style="color:#5900b3;">- {{ post[1] }}</p>
-		<form action="/postDelete">
-		<a href="postDelete?id={{ post.id }}"><input type="submit" name="id" value="Delete"></a>
+		<form action="/postDelete" method="POST">
+		<input type="submit" name="id" value="Delete">
 		<br>
 		<br>
 		</li>
