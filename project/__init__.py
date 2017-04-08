@@ -68,11 +68,11 @@ def like():
     if request.method == 'POST':
         flash('You liked this post')
         like = request.form['l']
-        models.insertPost(like)
+        models.insertLike(like)
         posts = models.retrievePosts()
         return render_template('posts.html', posts=posts)
     else:
-        posts = models.retrievePosts()
+        posts = models.retrieveLikes()
         return render_template('posts.html', posts=posts)
 
 
@@ -81,11 +81,11 @@ def dislike():
     if request.method == 'POST':
         flash('You disliked this post')
         dislike = request.form['d']
-        models.insertPost(dislike)
+        models.insertDislike(dislike)
         posts = models.retrievePosts()
         return render_template('posts.html', posts=posts)
     else:
-        posts = models.retrievePosts()
+        posts = models.retrieveDislikes()
         return render_template('posts.html', posts=posts)
 
 
