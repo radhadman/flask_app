@@ -73,7 +73,6 @@ def like():
         return render_template('posts.html', likes=likes)
     else:
         likes = models.retrieveLikes()
-		posts = models.retrievePosts()
         return render_template('posts.html', likes=likes, posts=posts)
 
 
@@ -86,7 +85,6 @@ def dislike():
         return render_template('posts.html', dislikes=dislikes)
     else:
         dislikes = models.retrieveDislikes()
-		posts = models.retrievePosts()
         return render_template('posts.html', dislikes=dislikes, posts=posts)
 
 
