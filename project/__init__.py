@@ -66,27 +66,25 @@ def posts():
 @app.route('/like', methods=['POST', 'GET'])
 def like():
     if request.method == 'POST':
-        flash('You liked this post')
         like = request.form['l']
         models.insertLike(like)
-        posts = models.retrievePosts()
-        return render_template('posts.html', posts=posts)
+        likes = models.retrieveLikes()
+        return render_template('posts.html', likes=likes)
     else:
-        posts = models.retrieveLikes()
-        return render_template('posts.html', posts=posts)
+        likes = models.retrieveLikes()
+        return render_template('posts.html', likes=likes)
 
 
 @app.route('/dislike', methods=['POST', 'GET'])
 def dislike():
     if request.method == 'POST':
-        flash('You disliked this post')
         dislike = request.form['d']
         models.insertDislike(dislike)
-        posts = models.retrievePosts()
-        return render_template('posts.html', posts=posts)
+        dislikes = models.retrieveDislikes()
+        return render_template('posts.html', dislikes=dislikes)
     else:
-        posts = models.retrieveDislikes()
-        return render_template('posts.html', posts=posts)
+        dislikes = models.retrieveDislikes()
+        return render_template('posts.html', dislikes=dislikes)
 
 
 # start the server with the 'run()' method
