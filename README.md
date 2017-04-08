@@ -5,11 +5,7 @@ Project features the following modifications from Assignment 2:
 - colour and style changes were added to forum posts for legibility and looks
 - changed size and wording of webpage nagivation links
 - "top of page" function added to page for convenience
+- current date & time can be checked on posts page and home page
 
-if request.method == 'POST':
-        id = request.form['id']
-		models.deletePost(id)
-        posts = models.retrievePosts()
-        return render_template('deletepost.html', posts=posts)
 
 

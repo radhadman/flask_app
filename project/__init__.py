@@ -21,6 +21,7 @@ def login_required(f):
 @app.route('/')
 @login_required
 def home():
+    flash('Welcome user.')
 	return render_template('index.html')	
 
 
