@@ -20,11 +20,11 @@ parameters:
 
   ssh_key_name:
     type: string
-    description: lab2key
+    description: OpenStack key name
 
   authkeys_url:
     type: string
-    description: https://cisgitlab.ufv.ca/300087669.keys
+    description: url of public keys to add to authorized_keys file (refreshes every 15 minutes)
 
   deploy_repository:
     type: string
@@ -123,9 +123,9 @@ resources:
               permissions: '0600'
               content: |
                  -----BEGIN EC PRIVATE KEY-----
-                 MHcCAQEEILtnwzkt0Hz1MzfkOrIGn14bfu/y0iY6lS0b1O1SmaWZoAoGCCqGSM49
-                 AwEHoUQDQgAE+zHZb2S2eL9ipD6WFFiSW6PpomyUQbmvbu+YoLY2v3DpkmRu2BQW
-                 9ent/QwE9gAB0kgZS98WfTZiAlCqV04/jg==
+                 MHcCAQEEIPRf0y/U+Y4i+XUvlysM0748CHKvSa7gC3eINNn+0OsfoAoGCCqGSM49
+                 AwEHoUQDQgAEVjSAEbCyBTX9k/kVNCaYxIeeVlAZJhKWxciPxn5zoJuowhpLkorj
+                 WaYmdPafGvYYHq10HWvNAUECp2TtT/QeHg==
                  -----END EC PRIVATE KEY-----
             - owner: root:root
               path: /root/.ssh/known_hosts
