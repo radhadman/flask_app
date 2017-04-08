@@ -10,7 +10,9 @@ q = """
 CREATE TABLE IF NOT EXISTS posts (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
-    comment TEXT NOT NULL
+    comment TEXT NOT NULL,
+	like SMALLINT,
+	dislike SMALLINT
 );
 """
 

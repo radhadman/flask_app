@@ -63,6 +63,30 @@ def posts():
         return render_template('posts.html', posts=posts)
 
 
+@app.route('/like', methods=['POST', 'GET'])
+    if request.method == 'POST':
+        flash('You liked this post')
+        like = request.form['l']
+        models.insertPost(like)
+        posts = models.retrievePosts()
+        return render_template('posts.html', posts=posts)
+    else:
+        posts = models.retrievePosts()
+        return render_template('posts.html', posts=posts)
+
+
+@app.route('/dislike', methods=['POST', 'GET'])
+    if request.method == 'POST':
+        flash('You disliked this post')
+        dislike = request.form['d']
+        models.insertPost(dislike)
+        posts = models.retrievePosts()
+        return render_template('posts.html', posts=posts)
+    else:
+        posts = models.retrievePosts()
+        return render_template('posts.html', posts=posts)
+
+
 # start the server with the 'run()' method
 if __name__ == '__main__':
     app.run(debug=True)

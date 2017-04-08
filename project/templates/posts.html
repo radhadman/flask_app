@@ -7,14 +7,8 @@
   </head>
   
   <div class="container">
-		
+  
       <h1>Posts</h1>
-	  <p style="font-size: 75%" id="demo"></p>
-
-<script >
-var d = new Date();
-document.getElementById("demo").innerHTML = d;
-</script>
       <p>You are logged in.</p>
 	  <br>
 	  <p style="font-size: 125%"><a href="/logout">Logout</a></p>
@@ -42,6 +36,10 @@ document.getElementById("demo").innerHTML = d;
 		{% for post in posts %}
 		<li><p style="color:#737373; font-size:150%; display:inline;">{{ post[0] }}</p> said:
 		<p style="color:#5900b3;">- {{ post[1] }}</p>
+		<form action="/like" method="POST">
+		<input type="submit" name="l" value=":)"></form>
+		<form action="/dislike" method="POST">
+		<input type="submit" name="d" value=":("></form>
 		<br>
 		<br>
 		</li>
