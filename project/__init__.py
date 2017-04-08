@@ -67,7 +67,8 @@ def posts():
 @app.route('/like', methods=['POST', 'GET'])
 def like():
     if request.method == 'POST':
-        models.insertLike()
+        like = request.form['l']
+        models.insertLike(like)
         likes = models.retrieveLikes()
         posts = models.retrievePosts()
         return render_template('posts.html', likes=likes, posts=posts)
@@ -79,9 +80,9 @@ def like():
 @app.route('/dislike', methods=['POST', 'GET'])
 def dislike():
     if request.method == 'POST':
-        models.insertDislike()
+        dislike = request.form['d']
+        models.insertDislike(dislike)
         dislikes = models.retrieveDislikes()
-        posts = models.retrievePosts()
         return render_template('posts.html', dislikes=dislikes, posts=posts)
     else:
         dislikes = models.retrieveDislikes()

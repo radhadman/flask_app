@@ -43,10 +43,10 @@ def retrievePosts():
     return posts
 	
 	
-def insertLike():
+def insertLike(like):
     con = sql.connect("database.db")
     cur = con.cursor()
-    cur.execute("UPDATE posts SET likes = likes + 1")
+    cur.execute("UPDATE posts SET likes = likes + 1",(like))
     con.commit()
     con.close()
 
@@ -60,10 +60,10 @@ def retrieveLikes():
     return likes
 
 
-def insertDislike():
+def insertDislike(dislike):
     con = sql.connect("database.db")
     cur = con.cursor()
-    cur.execute("UPDATE posts SET dislikes = dislikes + 1")
+    cur.execute("UPDATE posts SET dislikes = dislikes + 1",(dislike))
     con.commit()
     con.close()
 
