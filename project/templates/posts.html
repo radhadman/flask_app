@@ -36,9 +36,9 @@
 		{% for post in posts %}
 		<li><p style="color:#737373; font-size:150%; display:inline;">{{ post[0] }}</p> said:
 		<p style="color:#5900b3;">- {{ post[1] }}</p>
-		<form action="/like" method="POST">
+		<form action="/like" method="POST" style="display:inline">
 		<input type="submit" name="l" value=":)"></form>
-		<form action="/dislike" method="POST">
+		<form action="/dislike" method="POST" style="display:inline">
 		<input type="submit" name="d" value=":("></form>
 		<br>
 		<br>
