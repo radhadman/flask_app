@@ -52,7 +52,6 @@ def logout():
 
 @app.route('/posts', methods=['POST', 'GET'])
 def posts():
-	error = None
     if request.method == 'POST':
         flash('Your post was submitted!')
         name = request.form['x']
