@@ -72,7 +72,7 @@ def createUser():
 		models.insertUser(u,p)
 		return render_template('createUser.html')
     else:
-        return render_template('posts.html'
+        return render_template('posts.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
