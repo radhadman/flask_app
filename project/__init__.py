@@ -52,12 +52,7 @@ def logout():
 
 @app.route('/posts', methods=['POST', 'GET'])
 def posts():
-    if session['logged_in'] = True
-        flash('You are logged in)
-	elif session['logged_in'] = False
-        session.pop('logged_in', None)
-        flash('You have been logged out.')
-    elif request.method == 'POST':
+    if request.method == 'POST':
         flash('Your post was submitted!')
         name = request.form['x']
         comment = request.form['y']
