@@ -67,7 +67,7 @@ def posts():
 @app.route('/create', methods=['POST', 'GET'])
 def createUser():
     if request.method == 'POST':
-        if request.form['confirm'] != request.form['pass']
+        if request.form['confirm'] != request.form['pass']:
             error = 'Passwords do not match. Please try again.'
         u = request.form['user']
         p = request.form['pass']
