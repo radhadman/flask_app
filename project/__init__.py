@@ -52,7 +52,12 @@ def logout():
 
 @app.route('/posts', methods=['POST', 'GET'])
 def posts():
-    if request.method == 'POST':
+    if session['logged_in'] = True
+        flash('You are logged in)
+	elif session['logged_in'] = False
+        session.pop('logged_in', None)
+        flash('You have been logged out.')
+    elif request.method == 'POST':
         flash('Your post was submitted!')
         name = request.form['x']
         comment = request.form['y']
@@ -64,34 +69,5 @@ def posts():
         return render_template('posts.html', posts=posts)
 
 
-@app.route('/like', methods=['POST', 'GET'])
-def like():
-    if request.method == 'POST':
-        like = request.form['l']
-        models.insertLike(like)
-        likes = models.retrieveLikes()
-        posts = models.retrievePosts()
-        return render_template('posts.html', likes=likes, posts=posts)
-    else:
-        likes = models.retrieveLikes()
-        posts = models.retrievePosts()
-        return render_template('posts.html', likes=likes, posts=posts)
-
-
-@app.route('/dislike', methods=['POST', 'GET'])
-def dislike():
-    if request.method == 'POST':
-        dislike = request.form['d']
-        models.insertDislike(dislike)
-        dislikes = models.retrieveDislikes()
-        posts = models.retrievePosts()
-        return render_template('posts.html', dislikes=dislikes, posts=posts)
-    else:
-        dislikes = models.retrieveDislikes()
-        posts = models.retrievePosts()
-        return render_template('posts.html', dislikes=dislikes, posts=posts)
-
-
-# start the server with the 'run()' method
 if __name__ == '__main__':
     app.run(debug=True)
