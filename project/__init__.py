@@ -39,6 +39,8 @@ def login():
         else:
             session['logged_in'] = True
             return redirect(url_for('home'))
+    else:
+		return render_template('login.html')
     return render_template('login.html', error=error)
 
 
