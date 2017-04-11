@@ -74,7 +74,7 @@ def createUser():
         models.insertUser(u,p)
         return render_template('createUser.html', error=error)
     else:
-        return render_template('createUser.html')
+        return render_template('createUser.html', error=error)
 
 
 if __name__ == '__main__':
