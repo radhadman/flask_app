@@ -39,8 +39,8 @@ def login():
         else:
             session['logged_in'] = True
             return redirect(url_for('home'))
-    else:
-        return render_template('login.html', error=error)
+    users = models.retrieveUsers()
+    return render_template('login.html', error=error, users=users)
 
 
 @app.route('/logout')
