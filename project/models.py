@@ -15,6 +15,19 @@ CREATE TABLE IF NOT EXISTS posts (
 """
 
 
+y = """
+CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT NOT NULL,
+    password TEXT NOT NULL
+);
+"""
+
+con = sql.connect("database.db")
+cur = con.cursor()
+cur.execute(y)
+
+
 con = sql.connect("database.db")
 cur = con.cursor()
 cur.execute(x)
@@ -40,3 +53,11 @@ def retrievePosts():
     posts = cur.fetchall()
     con.close()
     return posts
+
+
+def insertUser(user,password):
+    con = sql.connect("database.db")
+    cur = con.cursor()
+    cur.execute("INSERT INTO users (username,password) VALUES (?,?)",(user,password))
+    con.commit()
+    con.close()
