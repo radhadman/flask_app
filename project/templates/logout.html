@@ -8,6 +8,10 @@
   <body>
     <div class="container">
       <h1>Goodbye!</h1>
+	  <script >
+		var d = new Date();
+		document.getElementById("date").innerHTML = d;
+	</script>
        {% for message in get_flashed_messages() %}
         {{ message }}
       {% endfor %}

@@ -40,8 +40,7 @@ def login():
             session['logged_in'] = True
             return redirect(url_for('home'))
     else:
-		return render_template('login.html')
-    return render_template('login.html', error=error)
+        return render_template('login.html', error=error)
 
 
 @app.route('/logout')

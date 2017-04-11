@@ -5,7 +5,7 @@ Project features the following modifications from Assignment 2:
 - colour and style changes were added to forum posts for legibility and looks
 - changed size and wording of webpage nagivation links
 - "top of page" function added to page for convenience
-- current date & time can be checked on login, home, and posts page
+- current date & time added to all pages
 - added a DROP TABLE query that refreshes the posts database every time a user logs in
 
 -----------------------------------------------------------------------------------------------------------
