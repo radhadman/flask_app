@@ -52,6 +52,7 @@ def logout():
 
 @app.route('/posts', methods=['POST', 'GET'])
 def posts():
+	error = None
     if request.method == 'POST':
         flash('Your post was submitted!')
         name = request.form['x']
@@ -67,10 +68,12 @@ def posts():
 @app.route('/create', methods=['POST', 'GET'])
 def createUser():
     if request.method == 'POST':
+        if request.form['pass'] != request.form['confirm']
+            error = 'Passwords do not match. Please try again.'
         u = request.form['user']
         p = request.form['pass']
         models.insertUser(u,p)
-        return render_template('createUser.html')
+        return render_template('createUser.html', error=error)
     else:
         return render_template('createUser.html')
 
