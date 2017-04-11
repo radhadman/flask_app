@@ -39,8 +39,7 @@ def login():
         else:
             session['logged_in'] = True
             return redirect(url_for('home'))
-    users = models.retrieveUsers()
-    return render_template('login.html', error=error, users=users)
+    return render_template('login.html', error=error)
 
 
 @app.route('/logout')
@@ -63,19 +62,6 @@ def posts():
     else:
         posts = models.retrievePosts()
         return render_template('posts.html', posts=posts)
-
-
-@app.route('/create', methods=['POST', 'GET'])
-def createUser():
-    if request.method == 'POST':
-        if request.form['confirm'] != request.form['pass']:
-            error = 'Passwords do not match. Please try again.'
-        u = request.form['user']
-        p = request.form['pass']
-        models.insertUser(u,p)
-        return render_template('createUser.html', error=error)
-    else:
-        return render_template('createUser.html')
 
 
 if __name__ == '__main__':

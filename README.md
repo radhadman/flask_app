@@ -9,10 +9,24 @@ Project features the following modifications from Assignment 2:
 - added a DROP TABLE query that refreshes the posts database every time a user logs in
 
 -----------------------------------------------------------------------------------------------------------
+**Note: I wanted to upload a working webapp rather than upload one with many issues. However, 
+I have pasted below some of my rough implementations that failed to work**
 
 - attempt made to add a "Like" and "Dislike" button but could not get it fully functioning 
     -(removed... code that I had in models for like/dislike function shown below)
-{
+
+	
+  models.py     {
+	
+	q = """
+CREATE TABLE IF NOT EXISTS posts (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    comment TEXT NOT NULL,
+	likes INTEGER,
+	dislikes INTEGER 
+);
+"""
 
 def insertLike(like):
     con = sql.connect("database.db")
@@ -79,22 +93,64 @@ def dislike():
         return render_template('posts.html', dislikes=dislikes, posts=posts)
 }
 
-Table for posts was this: 
 
-q = """
-CREATE TABLE IF NOT EXISTS posts (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT NOT NULL,
-    comment TEXT NOT NULL,
-	likes INTEGER,
-	dislikes INTEGER 
-);
-"""
+---------------------------------------------------------------------------------------------------------
+
 	
 - attempt was also made to add a deletePost function but also had troubles with this (removed)  
    -(also removed ,wrote a deletePost function and tried to implement this in __init__.py but had issues)
+   
+-also created a "Create Account" page that uses a form to input a user/password and send the data
+to a table called "users." However, I struggled to figure out what the python code would be in order
+to check that the user/password input on /login = some user/password pair from data table.
+Everything worked except I could not solve the missing code. Below were my implementations
+
+Models.py
+
+{
+y = """
+CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT NOT NULL,
+    password TEXT NOT NULL
+);
+"""
+
+def insertUser(user,password):
+    con = sql.connect("database.db")
+    cur = con.cursor()
+    cur.execute("INSERT INTO users (username,password) VALUES (?,?)",(user,password))
+    con.commit()
+    con.close()
+
+
+def retrieveUsers():
+    con = sql.connect("database.db")
+    cur = con.cursor()
+    cur.execute("SELECT username, password FROM users")
+    users = cur.fetchall()
+    con.close()
+    return users
+}
+
+
+
+__init__.py    {
+
+@app.route('/create', methods=['POST', 'GET'])
+def createUser():
+    if request.method == 'POST':
+        if request.form['confirm'] != request.form['pass']:
+            error = 'Passwords do not match. Please try again.'
+        u = request.form['user']
+        p = request.form['pass']
+        models.insertUser(u,p)
+        return render_template('createUser.html', error=error)
+    else:
+        return render_template('createUser.html')
+}
 	
-**Note: I wanted to upload a working webapp rather than upload one with many issues.**
+
 
 
 
