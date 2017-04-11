@@ -8,12 +8,12 @@
   <body>
     <div class="container">
       <h1>Home</h1>
-      <p style="font-size: 75%" id="demo"></p>
+      <p style="font-size: 75%" id="date"></p>
 
-<script >
-var d = new Date();
-document.getElementById("demo").innerHTML = d;
-</script>
+		<script >
+		var d = new Date();
+		document.getElementById("date").innerHTML = d;
+		</script>
 {% for message in get_flashed_messages() %}
         {{ message }}
       {% endfor %}

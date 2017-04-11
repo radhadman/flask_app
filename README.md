@@ -75,9 +75,19 @@ def dislike():
         dislikes = models.retrieveDislikes()
         posts = models.retrievePosts()
         return render_template('posts.html', dislikes=dislikes, posts=posts)
-	
-
 }
+
+Table for posts was this: 
+
+q = """
+CREATE TABLE IF NOT EXISTS posts (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    comment TEXT NOT NULL,
+	likes INTEGER,
+	dislikes INTEGER 
+);
+"""
 	
 - attempt was also made to add a deletePost function but also had troubles with this (removed)  
    -(also removed ,wrote a deletePost function and tried to implement this in __init__.py but had issues)
