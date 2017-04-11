@@ -5,8 +5,10 @@ Project features the following modifications from Assignment 2:
 - colour and style changes were added to forum posts for legibility and looks
 - changed size and wording of webpage nagivation links
 - "top of page" function added to page for convenience
-- current date & time can be checked on posts page and home page
+- current date & time can be checked on login, home, and posts page
 - added a DROP TABLE query that refreshes the posts database every time a user logs in
+
+-----------------------------------------------------------------------------------------------------------
 
 - attempt made to add a "Like" and "Dislike" button but could not get it fully functioning 
     -(removed... code that I had in models for like/dislike function shown below)
